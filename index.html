@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backend Dev Roadmap — 3 Months to Hired</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #f78166;
+    --accent4: #ffa657;
+    --purple: #bc8cff;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 2rem; height: 52px; gap: 0;
+  }
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 13px; color: var(--accent2);
+    margin-right: auto; font-weight: 600;
+  }
+  .nav-links { display: flex; gap: 0; }
+  .nav-links a {
+    font-size: 12px; color: var(--muted);
+    text-decoration: none; padding: 0 14px; height: 52px;
+    display: flex; align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+    font-family: var(--mono);
+  }
+  .nav-links a:hover { color: var(--text); border-color: var(--border); }
+
+  /* HERO */
+  .hero {
+    padding: 110px 2rem 60px;
+    max-width: 900px; margin: 0 auto;
+    text-align: left;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--accent2); margin-bottom: 16px;
+    letter-spacing: .08em;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600; line-height: 1.15;
+    color: var(--text); margin-bottom: 20px;
+    letter-spacing: -.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: 16px; color: var(--muted);
+    max-width: 560px; line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .hero-stack {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px;
+  }
+  .stack-chip {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--accent); padding: 4px 10px; border-radius: 4px;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; max-width: 500px;
+  }
+  .stat {
+    background: var(--bg2); padding: 16px 20px;
+  }
+  .stat-num {
+    font-family: var(--mono); font-size: 22px;
+    font-weight: 600; color: var(--accent2);
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 60px 2rem; border-top: 1px solid var(--border); }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); letter-spacing: .1em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 1.6rem; font-weight: 600;
+    margin-bottom: 32px; letter-spacing: -.01em;
+  }
+
+  /* ROLES TABLE */
+  .roles-grid { display: grid; gap: 12px; }
+  .role-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    transition: border-color .2s;
+  }
+  .role-card:hover { border-color: var(--accent); }
+  .role-card.primary { border-color: var(--accent2); }
+  .role-name {
+    font-size: 15px; font-weight: 600; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .role-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+  .role-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--muted); padding: 2px 8px; border-radius: 3px;
+  }
+  .tag.add { color: var(--accent4); border-color: #3d2e1a; background: #1e1710; }
+  .badge {
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; white-space: nowrap; align-self: flex-start;
+  }
+  .badge-green { background: #0d2818; color: var(--accent2); border: 1px solid #1a4a29; }
+  .badge-blue { background: #0d1e36; color: var(--accent); border: 1px solid #1a3658; }
+  .badge-amber { background: #2b1d0e; color: var(--accent4); border: 1px solid #4a3016; }
+  .badge-red { background: #2d0f0f; color: var(--accent3); border: 1px solid #4d1a1a; }
+  .role-ratings {
+    display: flex; gap: 16px; margin-top: 10px;
+    border-top: 1px solid var(--border); padding-top: 10px;
+  }
+  .rating-item { font-size: 12px; }
+  .rating-label { color: var(--muted); margin-bottom: 2px; }
+  .rating-val { color: var(--accent4); font-family: var(--mono); }
+
+  /* MONTH TABS */
+  .month-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  .month-tab {
+    font-family: var(--mono); font-size: 13px;
+    color: var(--muted); padding: 10px 20px;
+    cursor: pointer; border: none; background: none;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color .15s, border-color .15s;
+  }
+  .month-tab.active { color: var(--accent); border-color: var(--accent); }
+  .month-panel { display: none; }
+  .month-panel.active { display: block; }
+
+  .month-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+  }
+  .month-badge {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--accent); color: #0d1117;
+    padding: 4px 12px; border-radius: 3px; font-weight: 600;
+  }
+  .month-theme { font-size: 18px; font-weight: 600; }
+  .month-goal { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+  .week-grid { display: grid; gap: 10px; }
+  .week-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .week-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; cursor: pointer;
+    background: var(--bg2);
+    border-bottom: 1px solid transparent;
+    transition: background .15s;
+  }
+  .week-header:hover { background: var(--bg3); }
+  .week-header.open { border-color: var(--border); }
+  .week-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); min-width: 50px;
+  }
+  .week-title { font-size: 14px; font-weight: 500; flex: 1; }
+  .week-chevron { color: var(--muted); font-size: 12px; transition: transform .2s; }
+  .week-chevron.open { transform: rotate(90deg); }
+  .week-body { display: none; padding: 16px 20px; background: var(--bg); }
+  .week-body.open { display: block; }
+
+  .topic-list { list-style: none; padding: 0; }
+  .topic-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .topic-list li:last-child { border: none; }
+  .topic-list li::before {
+    content: '→';
+    color: var(--accent); flex-shrink: 0; margin-top: 1px;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .topic-list li strong { color: var(--text); font-weight: 500; }
+
+  .subtopic-group { margin-top: 12px; }
+  .subtopic-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent2); margin-bottom: 8px; letter-spacing: .05em;
+  }
+
+  /* PROJECTS */
+  .project-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; margin-bottom: 20px; overflow: hidden;
+  }
+  .project-card.star { border-color: var(--accent4); }
+  .project-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .project-num-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg3); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    color: var(--accent); flex-shrink: 0;
+  }
+  .project-num-circle.gold { color: var(--accent4); border-color: #4a3016; background: #1e1710; }
+  .project-title-block { flex: 1; }
+  .project-title {
+    font-size: 16px; font-weight: 600; margin-bottom: 4px;
+  }
+  .project-subtitle { font-size: 13px; color: var(--muted); }
+  .project-star-tag {
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    background: #2b1d0e; color: var(--accent4);
+    border: 1px solid #4a3016; border-radius: 20px;
+    white-space: nowrap;
+  }
+  .project-body { padding: 20px 24px; display: grid; gap: 20px; }
+  .project-section-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); letter-spacing: .08em; margin-bottom: 8px;
+  }
+  .project-section-content { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .feature-list { list-style: none; padding: 0; }
+  .feature-list li {
+    padding: 5px 0; font-size: 13px; color: var(--muted);
+    display: flex; gap: 10px; align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-list li:last-child { border: none; }
+  .feature-list li::before {
+    content: '✦'; color: var(--accent2);
+    font-size: 9px; margin-top: 5px; flex-shrink: 0;
+  }
+  .tech-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tech-chip {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--accent); padding: 3px 10px; border-radius: 3px;
+  }
+  .concept-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .concept-chip {
+    font-size: 11px; font-weight: 500;
+    background: #0d2818; color: var(--accent2);
+    border: 1px solid #1a4a29; padding: 3px 10px; border-radius: 3px;
+  }
+  .project-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 600px) { .project-grid-2 { grid-template-columns: 1fr; } }
+
+  /* POSITIONING */
+  .position-highlight {
+    background: var(--bg2); border: 1px solid var(--accent);
+    border-radius: 8px; padding: 24px 28px; margin-bottom: 28px;
+  }
+  .position-title-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .position-title-big {
+    font-size: 22px; font-weight: 600; color: var(--accent);
+    font-family: var(--mono); margin-bottom: 8px;
+  }
+  .position-note { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
+  .company-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 20px;
+  }
+  .company-type { font-size: 14px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .company-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .company-platforms { margin-top: 10px; font-family: var(--mono); font-size: 11px; color: var(--accent); }
+
+  .salary-bar {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px; margin-top: 20px;
+  }
+  .salary-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .salary-row:last-child { border: none; }
+  .salary-type { color: var(--muted); min-width: 180px; }
+  .salary-range {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--accent2);
+  }
+  .salary-bar-vis {
+    flex: 1; height: 4px; background: var(--bg3);
+    border-radius: 2px; overflow: hidden;
+  }
+  .salary-fill { height: 100%; background: var(--accent2); border-radius: 2px; }
+
+  /* SKILLS CHECKLIST */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 12px; }
+  .skill-group {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px;
+  }
+  .skill-group-title {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--accent2); margin-bottom: 12px; font-weight: 600;
+  }
+  .skill-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 0; font-size: 13px; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-item:last-child { border: none; }
+  .skill-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .skill-dot.have { background: var(--accent2); }
+  .skill-dot.need { background: var(--accent4); }
+  .skill-dot.bonus { background: var(--purple); }
+  .skill-item span { flex: 1; }
+  .skill-status { font-size: 10px; font-family: var(--mono); }
+  .status-have { color: var(--accent2); }
+  .status-need { color: var(--accent4); }
+  .status-bonus { color: var(--purple); }
+
+  .legend { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+
+  /* DSA SECTION */
+  .dsa-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  .dsa-table th {
+    text-align: left; font-family: var(--mono); font-size: 11px;
+    color: var(--muted); padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500; letter-spacing: .05em;
+  }
+  .dsa-table td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    color: var(--muted); vertical-align: top;
+  }
+  .dsa-table tr:last-child td { border: none; }
+  .dsa-table td:first-child { color: var(--text); font-weight: 500; }
+  .dsa-table tr:hover td { background: var(--bg2); }
+
+  /* INTERVIEW PREP */
+  .qa-list { display: grid; gap: 10px; }
+  .qa-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .qa-q {
+    padding: 12px 16px; font-size: 13px; font-weight: 500;
+    cursor: pointer; display: flex; align-items: center; gap: 10px;
+    transition: background .15s;
+  }
+  .qa-q:hover { background: var(--bg3); }
+  .qa-q-prefix {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--accent); background: var(--bg3);
+    border: 1px solid var(--border); padding: 2px 6px;
+    border-radius: 3px; flex-shrink: 0;
+  }
+  .qa-a {
+    display: none; padding: 12px 16px;
+    font-size: 13px; color: var(--muted); line-height: 1.7;
+    border-top: 1px solid var(--border); background: var(--bg);
+  }
+  .qa-a.open { display: block; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 2rem; text-align: center;
+    color: var(--muted); font-size: 12px; font-family: var(--mono);
+  }
+
+  /* PROGRESS BAR (decorative) */
+  .timeline-strip {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px; margin-bottom: 28px;
+  }
+  .timeline-block {
+    height: 4px; border-radius: 2px;
+  }
+  .tl-m1 { background: var(--accent); }
+  .tl-m2 { background: var(--accent2); }
+  .tl-m3 { background: var(--accent4); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links a { padding: 0 8px; font-size: 11px; }
+    .hero { padding: 90px 1rem 40px; }
+    section { padding: 40px 1rem; }
+    .role-card { grid-template-columns: 1fr; }
+    .project-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">$ backend-roadmap.sh</div>
+  <div class="nav-links">
+    <a href="#roles">Roles</a>
+    <a href="#skills">Skills</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#projects">Projects</a>
+    <a href="#interviews">Interviews</a>
+    <a href="#positioning">Positioning</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">// India · Entry-level · Backend · 3 months</div>
+  <h1>Your roadmap to a <span>Node.js backend</span> job in India</h1>
+  <p class="hero-desc">A practical, week-by-week plan built around your current skills — no frontend fluff, no premature DevOps. Pure backend: APIs, databases, queues, and auth.</p>
+  <div class="hero-stack">
+    <span class="stack-chip">JavaScript</span>
+    <span class="stack-chip">Node.js</span>
+    <span class="stack-chip">Express.js</span>
+    <span class="stack-chip">MongoDB</span>
+    <span class="stack-chip">PostgreSQL</span>
+    <span class="stack-chip">React</span>
+    <span class="stack-chip">Redux Toolkit</span>
+    <span class="stack-chip">REST APIs</span>
+    <span class="stack-chip">Git/GitHub</span>
+    <span class="stack-chip">Docker (basic)</span>
+    <span class="stack-chip">AWS EC2 (basic)</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">months to job-ready</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">resume projects</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">weeks of content</div></div>
+    <div class="stat"><div class="stat-num">₹6–8L</div><div class="stat-label">realistic first salary</div></div>
+  </div>
+</div>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 01 · target roles</div>
+    <h2 class="section-title">Best roles for your skillset</h2>
+    <div class="roles-grid">
+
+      <div class="role-card primary">
+        <div>
+          <div class="role-name">Node.js / Backend Developer <span class="badge badge-green">Best fit</span></div>
+          <div class="role-desc">Your strongest match. Express + MongoDB + PostgreSQL + REST directly maps to what 80% of Indian startups post. Highest volume of fresher openings. This is your primary target title.</div>
+          <div class="role-ratings">
+            <div class="rating-item"><div class="rating-label">Hiring ease</div><div class="rating-val">★★★★★</div></div>
+            <div class="rating-item"><div class="rating-label">Remote odds</div><div class="rating-val">★★★★☆</div></div>
+            <div class="rating-item"><div class="rating-label">Salary growth</div><div class="rating-val">★★★★☆</div></div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="project-section-label">Skills to add for an edge</div>
+            <div class="role-tags"><span class="tag add">JWT / OAuth 2.0</span><span class="tag add">Redis caching</span><span class="tag add">Zod validation</span><span class="tag add">Jest unit tests</span><span class="tag add">API rate limiting</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div>
+          <div class="role-name">Full Stack Developer (Backend-heavy) <span class="badge badge-blue">Most openings</span></div>
+          <div class="role-desc">Most Indian job posts say "full stack" but really want strong backend + passable React. Your React checkbox lets you apply to these roles while your Node.js is the actual selling point. Don't skip these.</div>
+          <div class="role-ratings">
+            <div class="rating-item"><div class="rating-label">Hiring ease</div><div class="rating-val">★★★★★</div></div>
+            <div class="rating-item"><div class="rating-label">Remote odds</div><div class="rating-val">★★★★☆</div></div>
+            <div class="rating-item"><div class="rating-label">Salary growth</div><div class="rating-val">★★★★★</div></div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="project-section-label">Skills to add</div>
+            <div class="role-tags"><span class="tag add">System design basics</span><span class="tag add">BullMQ queues</span><span class="tag add">WebSockets</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div>
+          <div class="role-name">API / Integration Developer <span class="badge badge-amber">Niche, well paid</span></div>
+          <div class="role-desc">SaaS and B2B startups need developers who design and maintain REST/webhook integrations. Less common but higher quality roles with strong remote options. Good medium-term target.</div>
+          <div class="role-ratings">
+            <div class="rating-item"><div class="rating-label">Hiring ease</div><div class="rating-val">★★★☆☆</div></div>
+            <div class="rating-item"><div class="rating-label">Remote odds</div><div class="rating-val">★★★★★</div></div>
+            <div class="rating-item"><div class="rating-label">Salary growth</div><div class="rating-val">★★★★★</div></div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="project-section-label">Skills to add</div>
+            <div class="role-tags"><span class="tag add">Webhook design</span><span class="tag add">API versioning</span><span class="tag add">Swagger / OpenAPI</span><span class="tag add">Postman testing</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div>
+          <div class="role-name">Junior DevOps / Cloud Engineer <span class="badge badge-red">Not yet</span></div>
+          <div class="role-desc">Your Docker + EC2 + CI/CD is a resume bonus, not a job qualifier. Junior DevOps in India almost always requires Terraform, Kubernetes, and Linux admin. Build software skills first — this path opens naturally in 2–3 years.</div>
+          <div class="role-ratings">
+            <div class="rating-item"><div class="rating-label">Hiring ease</div><div class="rating-val">★★☆☆☆</div></div>
+            <div class="rating-item"><div class="rating-label">Remote odds</div><div class="rating-val">★★★☆☆</div></div>
+            <div class="rating-item"><div class="rating-label">Salary growth</div><div class="rating-val">★★★★★</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS MAP -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 02 · skills inventory</div>
+    <h2 class="section-title">What you have vs what to add</h2>
+    <div class="legend">
+      <div class="legend-item"><div class="skill-dot have"></div> Already have</div>
+      <div class="legend-item"><div class="skill-dot need"></div> Learn this roadmap</div>
+      <div class="legend-item"><div class="skill-dot bonus"></div> Bonus (later)</div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Core backend</div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Node.js runtime</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Express.js</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>JWT auth (access + refresh)</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Zod / Joi validation</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>API rate limiting</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Error handling middleware</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>GraphQL basics</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Databases</div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>MongoDB + Mongoose</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>PostgreSQL basics</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>PostgreSQL: indexes, JOINs</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Transactions & ACID</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Redis (caching, TTL)</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>Prisma ORM</span><span class="skill-status status-bonus">bonus</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>Database migrations</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// APIs & integrations</div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>REST API design</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Swagger / OpenAPI docs</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Webhook design</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>API versioning</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Postman testing / Newman</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>OAuth 2.0 flows</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Testing</div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Jest (unit tests)</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Supertest (API tests)</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Mocking / spies</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>Integration testing</span><span class="skill-status status-bonus">bonus</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>Test coverage reporting</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Async & queues</div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Promises / async-await</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>BullMQ job queues</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Retry / dead letter queues</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>Event-driven architecture</span><span class="skill-status status-bonus">bonus</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>WebSockets</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// DevOps (keep light)</div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Git / GitHub</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Docker basics</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>Basic CI/CD</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot have"></div><span>AWS EC2 basics</span><span class="skill-status status-have">have</span></div>
+        <div class="skill-item"><div class="skill-dot need"></div><span>Docker Compose</span><span class="skill-status status-need">add</span></div>
+        <div class="skill-item"><div class="skill-dot bonus"></div><span>GitHub Actions</span><span class="skill-status status-bonus">bonus</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 03 · 3-month roadmap</div>
+    <h2 class="section-title">Week-by-week learning plan</h2>
+
+    <div class="timeline-strip">
+      <div class="timeline-block tl-m1"></div>
+      <div class="timeline-block tl-m2"></div>
+      <div class="timeline-block tl-m3"></div>
+    </div>
+
+    <div class="month-tabs">
+      <button class="month-tab active" onclick="showMonth(0)">Month 1</button>
+      <button class="month-tab" onclick="showMonth(1)">Month 2</button>
+      <button class="month-tab" onclick="showMonth(2)">Month 3</button>
+    </div>
+
+    <!-- MONTH 1 -->
+    <div class="month-panel active" id="m0">
+      <div class="month-header">
+        <span class="month-badge" style="background:var(--accent);color:#0d1117">Month 1</span>
+        <span class="month-theme">Sharpen Foundations</span>
+      </div>
+      <p class="month-goal">Theme: Fill the critical gaps in your existing backend knowledge. No new frameworks yet — master what you already know, then add auth and testing.</p>
+      <div class="week-grid">
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 1</span>
+            <span class="week-title">Node.js internals + Express mastery</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Node.js core</div>
+              <ul class="topic-list">
+                <li><strong>Event loop</strong> — phases: timers, poll, check; why it matters for async code</li>
+                <li><strong>Blocking vs non-blocking I/O</strong> — when sync code stalls your server</li>
+                <li><strong>Streams</strong> — readable, writable, transform; streaming large files without memory crash</li>
+                <li><strong>Buffer and fs module</strong> — reading files, working with binary data</li>
+                <li><strong>process.env and config management</strong> — dotenv, environment variables best practices</li>
+                <li><strong>Module system</strong> — CommonJS vs ESM, circular dependencies</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Express deep-dive</div>
+              <ul class="topic-list">
+                <li><strong>Middleware chain</strong> — execution order, next(), error middleware (4 arguments)</li>
+                <li><strong>Router modularization</strong> — splitting routes into separate files cleanly</li>
+                <li><strong>Request lifecycle</strong> — from incoming request to response, every step</li>
+                <li><strong>Centralized error handling</strong> — one error handler for the whole app</li>
+                <li><strong>Helmet.js</strong> — security HTTP headers in 5 lines</li>
+                <li><strong>CORS configuration</strong> — allowlist, credentials, preflight</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice task</div>
+              <ul class="topic-list">
+                <li>Build a clean Express boilerplate: routes folder, middleware folder, error handler, dotenv. This becomes the base for Project 1.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 2</span>
+            <span class="week-title">PostgreSQL deep-dive</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// SQL you must know</div>
+              <ul class="topic-list">
+                <li><strong>JOINs</strong> — INNER, LEFT, RIGHT; when to use each; JOIN vs subquery</li>
+                <li><strong>Indexes</strong> — B-tree index, how it speeds reads, write overhead trade-off</li>
+                <li><strong>EXPLAIN ANALYZE</strong> — reading query plans, spotting seq scans</li>
+                <li><strong>Transactions</strong> — BEGIN, COMMIT, ROLLBACK; atomicity in practice</li>
+                <li><strong>ACID properties</strong> — what each one means, why databases guarantee them</li>
+                <li><strong>Constraints</strong> — PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, CHECK</li>
+                <li><strong>Aggregations</strong> — GROUP BY, HAVING, COUNT, SUM, AVG with real examples</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// With Node.js</div>
+              <ul class="topic-list">
+                <li><strong>pg (node-postgres)</strong> — connection pooling with Pool, parameterized queries</li>
+                <li><strong>SQL injection prevention</strong> — never interpolate user input directly</li>
+                <li><strong>Database migrations basics</strong> — what they are, why you need them (concept only, tool in Month 2)</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice task</div>
+              <ul class="topic-list">
+                <li>Design a users-and-posts schema. Write queries using JOINs + indexes. Run EXPLAIN ANALYZE and note the difference with vs without index.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 3</span>
+            <span class="week-title">JWT authentication + RBAC</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Auth concepts</div>
+              <ul class="topic-list">
+                <li><strong>How JWT works</strong> — header.payload.signature, what each part contains</li>
+                <li><strong>Access tokens vs refresh tokens</strong> — short-lived vs long-lived, when to rotate</li>
+                <li><strong>Token storage</strong> — localStorage vs httpOnly cookie, why cookie is more secure</li>
+                <li><strong>bcrypt</strong> — how hashing works, salts, why you never store plain passwords</li>
+                <li><strong>Token expiry and revocation</strong> — blacklisting tokens with Redis</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Implementation</div>
+              <ul class="topic-list">
+                <li><strong>Auth middleware</strong> — verifyToken function, attaching user to req object</li>
+                <li><strong>Role-based access control (RBAC)</strong> — admin / user roles, route-level checks</li>
+                <li><strong>Registration flow</strong> — validate input → hash password → save user → return token</li>
+                <li><strong>Login flow</strong> — find user → compare hash → sign token → return</li>
+                <li><strong>Protected routes</strong> — middleware chain: auth → role check → handler</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice task</div>
+              <ul class="topic-list">
+                <li>Build the full auth flow: register, login, refresh token, logout (blacklist token). This is the core of Project 1.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 4</span>
+            <span class="week-title">Input validation + unit testing with Jest</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Zod validation</div>
+              <ul class="topic-list">
+                <li><strong>Why validate at the API boundary</strong> — never trust client input</li>
+                <li><strong>Zod schemas</strong> — string, number, email, enum, optional, refinements</li>
+                <li><strong>Validation middleware</strong> — reusable validate(schema) middleware for any route</li>
+                <li><strong>Error formatting</strong> — returning structured validation errors to the client</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Jest testing</div>
+              <ul class="topic-list">
+                <li><strong>Test structure</strong> — describe, it/test, expect, matchers</li>
+                <li><strong>Mocking</strong> — jest.fn(), jest.mock(), mocking database calls</li>
+                <li><strong>Testing auth middleware</strong> — mock req/res, test token verification logic</li>
+                <li><strong>Supertest</strong> — integration tests for Express routes (POST /register, POST /login)</li>
+                <li><strong>Test coverage</strong> — jest --coverage, understanding what's tested</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Deliverable</div>
+              <ul class="topic-list">
+                <li><strong>Project 1 complete:</strong> Auth API with register, login, refresh, RBAC, Zod validation, Jest tests, and a proper README on GitHub.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MONTH 2 -->
+    <div class="month-panel" id="m1">
+      <div class="month-header">
+        <span class="month-badge" style="background:var(--accent2);color:#0d1117">Month 2</span>
+        <span class="month-theme">Build & Differentiate</span>
+      </div>
+      <p class="month-goal">Theme: Learn what freshers never build — Redis, queues, async patterns. Build Projects 2 and 3. Start applying.</p>
+      <div class="week-grid">
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 5</span>
+            <span class="week-title">Redis: caching, sessions, pub/sub</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Redis fundamentals</div>
+              <ul class="topic-list">
+                <li><strong>What Redis is</strong> — in-memory key-value store, why it's fast</li>
+                <li><strong>Data types</strong> — String, Hash, List, Set, Sorted Set; when to use each</li>
+                <li><strong>TTL (time-to-live)</strong> — expire keys automatically, cache invalidation strategies</li>
+                <li><strong>Cache-aside pattern</strong> — check cache → hit: return; miss: query DB, write to cache</li>
+                <li><strong>Cache invalidation</strong> — when to delete/update cached data</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// With Node.js (ioredis)</div>
+              <ul class="topic-list">
+                <li><strong>Connecting with ioredis</strong> — client setup, error handling, reconnection</li>
+                <li><strong>Caching API responses</strong> — middleware that checks Redis before hitting DB</li>
+                <li><strong>Token blacklisting</strong> — store revoked JWTs in Redis with TTL matching expiry</li>
+                <li><strong>Rate limiting with Redis</strong> — increment counter per IP, expire after window</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice task</div>
+              <ul class="topic-list">
+                <li>Add Redis caching to Project 1: cache user profile endpoint, use Redis for token blacklist on logout.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 6</span>
+            <span class="week-title">Job queues with BullMQ + Docker Compose</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Async processing concepts</div>
+              <ul class="topic-list">
+                <li><strong>Why queues exist</strong> — offloading slow tasks (email, PDF, image resize) from HTTP response</li>
+                <li><strong>Producer / consumer pattern</strong> — API adds jobs, worker processes them separately</li>
+                <li><strong>Job retry on failure</strong> — exponential backoff, max retries config</li>
+                <li><strong>Dead letter queue</strong> — where permanently failed jobs go</li>
+                <li><strong>Job priority</strong> — high-priority jobs processed before low-priority ones</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// BullMQ implementation</div>
+              <ul class="topic-list">
+                <li><strong>Queue, Worker, QueueEvents</strong> — BullMQ's three core classes</li>
+                <li><strong>Adding jobs</strong> — queue.add('job-name', data, options)</li>
+                <li><strong>Processing jobs</strong> — Worker with async processor function</li>
+                <li><strong>Job status</strong> — waiting, active, completed, failed, delayed</li>
+                <li><strong>Cron-style repeatable jobs</strong> — schedule recurring background tasks</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Docker Compose</div>
+              <ul class="topic-list">
+                <li><strong>docker-compose.yml</strong> — services, volumes, networks, environment vars</li>
+                <li><strong>Multi-service setup</strong> — app + Redis + PostgreSQL in one compose file</li>
+                <li><strong>depends_on + healthcheck</strong> — wait for DB before starting app</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Deliverable</div>
+              <ul class="topic-list">
+                <li><strong>Project 2 complete:</strong> Job queue system with BullMQ, Docker Compose, retry logic, dead letter queue, job status API endpoint.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 7</span>
+            <span class="week-title">MongoDB schema design + API documentation</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// MongoDB advanced</div>
+              <ul class="topic-list">
+                <li><strong>Embed vs reference</strong> — when to nest documents vs use ObjectId references</li>
+                <li><strong>Mongoose virtuals and methods</strong> — computed fields, instance methods</li>
+                <li><strong>Aggregation pipeline</strong> — $match, $group, $project, $lookup (JOIN equivalent)</li>
+                <li><strong>Indexes in MongoDB</strong> — single-field, compound, text search index</li>
+                <li><strong>Transactions in MongoDB</strong> — multi-document ACID with sessions</li>
+                <li><strong>Pagination</strong> — cursor-based vs offset-based; which to use and why</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// API documentation with Swagger</div>
+              <ul class="topic-list">
+                <li><strong>OpenAPI 3.0 spec</strong> — paths, operations, schemas, responses</li>
+                <li><strong>swagger-ui-express</strong> — serve interactive docs at /api-docs</li>
+                <li><strong>JSDoc annotations</strong> — document routes inline using @swagger comments</li>
+                <li><strong>Request / response schemas</strong> — document every endpoint's body and response</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice task</div>
+              <ul class="topic-list">
+                <li>Design the e-commerce schema (products, users, carts, orders). Write aggregation queries for order history and product popularity.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 8</span>
+            <span class="week-title">E-commerce API build + applications start</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Build Project 3</div>
+              <ul class="topic-list">
+                <li><strong>Product catalog API</strong> — CRUD, search (text index), filter by category/price, paginate</li>
+                <li><strong>Cart management</strong> — add/remove/update cart, calculate total</li>
+                <li><strong>Order placement</strong> — create order, decrement inventory atomically (transaction)</li>
+                <li><strong>Order status tracking</strong> — status enum: pending → processing → shipped → delivered</li>
+                <li><strong>Seeder script</strong> — populate DB with 50 fake products using faker.js</li>
+                <li><strong>Swagger docs</strong> — document every endpoint</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Start applying</div>
+              <ul class="topic-list">
+                <li>Set up LinkedIn: headline = "Node.js Backend Developer", pin GitHub link</li>
+                <li>Create Naukri profile with skills tagged: Node.js, Express, MongoDB, PostgreSQL, REST API</li>
+                <li>Join Wellfound (AngelList): target early-stage startups</li>
+                <li>Send 10–15 applications this week</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// DSA: start now</div>
+              <ul class="topic-list">
+                <li>20 min/day on LeetCode: arrays and strings (easy). Target: 5 problems this week.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MONTH 3 -->
+    <div class="month-panel" id="m2">
+      <div class="month-header">
+        <span class="month-badge" style="background:var(--accent4);color:#0d1117">Month 3</span>
+        <span class="month-theme">Interview Mode</span>
+      </div>
+      <p class="month-goal">Theme: Polish everything, prep for technical screens, apply aggressively. By end of week 12 you should have offers or final rounds scheduled.</p>
+      <div class="week-grid">
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 9</span>
+            <span class="week-title">System design basics for backend interviews</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Core concepts (fresher level)</div>
+              <ul class="topic-list">
+                <li><strong>Vertical vs horizontal scaling</strong> — scale up a server vs add more servers</li>
+                <li><strong>Load balancer</strong> — what it does, round-robin vs least connections</li>
+                <li><strong>Caching layer</strong> — where Redis sits in a typical web architecture</li>
+                <li><strong>Database read replicas</strong> — offload reads from the primary DB</li>
+                <li><strong>CDN</strong> — what it caches, when to use it (static assets)</li>
+                <li><strong>Monolith vs microservices</strong> — trade-offs at a high level (don't over-engineer this)</li>
+                <li><strong>Message queues in architecture</strong> — where BullMQ/Kafka fits in larger systems</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Practice questions (for freshers)</div>
+              <ul class="topic-list">
+                <li>"Design a URL shortener" — focus on DB schema + redirect logic</li>
+                <li>"Design a notification service" — this maps directly to your Project 2</li>
+                <li>"How would you scale this API?" — talk through caching, DB indexes, connection pooling</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 10</span>
+            <span class="week-title">DSA sprint + project polish</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// DSA topics to cover (backend interviews)</div>
+              <ul class="topic-list">
+                <li><strong>Arrays</strong> — two-pointer, sliding window, prefix sum</li>
+                <li><strong>Hashmaps</strong> — frequency count, two-sum variations, grouping</li>
+                <li><strong>Strings</strong> — reversal, palindrome, anagram checks</li>
+                <li><strong>Linked lists</strong> — reverse, detect cycle, merge sorted</li>
+                <li><strong>Stacks / queues</strong> — valid parentheses, implement queue using stacks</li>
+                <li><strong>Binary search</strong> — standard template, first/last occurrence</li>
+                <li><strong>Basic recursion</strong> — factorial, Fibonacci, tree traversal concepts</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Project polish</div>
+              <ul class="topic-list">
+                <li>All 3 READMEs: problem statement, architecture diagram (draw.io), setup instructions, API endpoints table, screenshot of Swagger UI</li>
+                <li>Record a 3-minute Loom walkthrough of Project 1 — link it in your README</li>
+                <li>Make sure all projects run with a single docker-compose up command</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 11</span>
+            <span class="week-title">Mock interviews + aggressive applying</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Mock interviews</div>
+              <ul class="topic-list">
+                <li>Do 2–3 mock technical interviews: Pramp (free), peers, or Discord communities (100xDevs, The Full Stack)</li>
+                <li>Practice explaining your projects in exactly 3 minutes each</li>
+                <li>Prepare answers to: "Tell me about yourself", "Why backend?", "What was the hardest bug you fixed?"</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// Application targets</div>
+              <ul class="topic-list">
+                <li>LinkedIn: filter "Node.js" + "Entry level" + India (or "Remote")</li>
+                <li>Naukri: "Node.js developer" + "0-1 years" + salary range ₹4-8L</li>
+                <li>Wellfound: browse Series A startups in Bangalore, Pune, Hyderabad, Delhi</li>
+                <li>Twitter/X: search "hiring Node.js India" — many founders post here</li>
+                <li><strong>Target: 15 applications per week minimum</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Week 12</span>
+            <span class="week-title">Offer negotiation + final prep</span>
+            <span class="week-chevron">▶</span>
+          </div>
+          <div class="week-body">
+            <div class="subtopic-group">
+              <div class="subtopic-label">// If you have offers</div>
+              <ul class="topic-list">
+                <li><strong>Don't accept same day</strong> — it's normal to say "Can I have 2–3 days to consider?"</li>
+                <li><strong>Counter-offer</strong> — if ₹5L is offered and the role fits, counter with ₹6.5L. The worst they say is no.</li>
+                <li><strong>Evaluate beyond salary</strong> — learning opportunity, team quality, tech stack, remote flexibility</li>
+                <li><strong>Ask about onboarding</strong> — do they have a mentor / buddy system?</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// If still in interviews</div>
+              <ul class="topic-list">
+                <li>Keep applying — don't stop at "promising" conversations until offer letter is signed</li>
+                <li>Revisit any weak DSA topics identified in mock interviews</li>
+                <li>Ask interviewers for feedback even if you don't get the role</li>
+              </ul>
+            </div>
+            <div class="subtopic-group">
+              <div class="subtopic-label">// After you join</div>
+              <ul class="topic-list">
+                <li>In the first 3 months at work: focus on reading existing code before writing new code</li>
+                <li>Build relationships with senior developers — your growth depends on mentorship</li>
+                <li>Target your first promotion/raise review at the 12-month mark</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 04 · resume projects</div>
+    <h2 class="section-title">3 projects to build (in this order)</h2>
+
+    <!-- PROJECT 1 -->
+    <div class="project-card star">
+      <div class="project-header">
+        <div class="project-num-circle gold">1</div>
+        <div class="project-title-block">
+          <div class="project-title">Multi-tenant REST API with Auth System</div>
+          <div class="project-subtitle">Month 1 — Weeks 3–4 · Build this first</div>
+        </div>
+        <span class="project-star-tag">★ Highest interview impact</span>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-section-label">WHY THIS WINS INTERVIEWS</div>
+          <div class="project-section-content">Every company asks "have you built an API with auth?" This is your direct answer. It shows you understand production patterns — not just CRUD. Auth is a near-universal first interview topic. Interviewers will ask you to walk through the code live.</div>
+        </div>
+        <div class="project-grid-2">
+          <div>
+            <div class="project-section-label">TECH STACK</div>
+            <div class="tech-chips">
+              <span class="tech-chip">Node.js</span>
+              <span class="tech-chip">Express.js</span>
+              <span class="tech-chip">PostgreSQL</span>
+              <span class="tech-chip">JWT</span>
+              <span class="tech-chip">bcrypt</span>
+              <span class="tech-chip">Zod</span>
+              <span class="tech-chip">Redis</span>
+              <span class="tech-chip">Jest</span>
+              <span class="tech-chip">Supertest</span>
+              <span class="tech-chip">Docker</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-section-label">BACKEND CONCEPTS PROVEN</div>
+            <div class="concept-chips">
+              <span class="concept-chip">JWT lifecycle</span>
+              <span class="concept-chip">RBAC</span>
+              <span class="concept-chip">Token rotation</span>
+              <span class="concept-chip">Password hashing</span>
+              <span class="concept-chip">Input validation</span>
+              <span class="concept-chip">Unit testing</span>
+              <span class="concept-chip">Redis blacklist</span>
+              <span class="concept-chip">Security patterns</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="project-section-label">FEATURES TO BUILD</div>
+          <ul class="feature-list">
+            <li>User registration with email + password (Zod validated, bcrypt hashed)</li>
+            <li>Login endpoint returning access token (15 min) + refresh token (7 days)</li>
+            <li>Token refresh endpoint — validate refresh token, issue new access token</li>
+            <li>Logout — blacklist refresh token in Redis with TTL matching expiry</li>
+            <li>Role-based middleware: admin routes vs user routes</li>
+            <li>Protected profile endpoint: GET /me, PATCH /me</li>
+            <li>Admin user management: list users, update roles, deactivate accounts</li>
+            <li>Rate limiting on auth endpoints (5 attempts/minute per IP)</li>
+            <li>Jest unit tests for auth middleware + validation logic</li>
+            <li>Supertest integration tests for all auth flows</li>
+          </ul>
+        </div>
+        <div>
+          <div class="project-section-label">WHAT TO HIGHLIGHT IN YOUR README</div>
+          <div class="project-section-content">Architecture diagram showing request → auth middleware → role check → handler. Token flow diagram (access token lifecycle). Table of all endpoints with method, path, auth required, roles. Local setup in 3 commands.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-num-circle">2</div>
+        <div class="project-title-block">
+          <div class="project-title">Job Queue & Background Worker System</div>
+          <div class="project-subtitle">Month 2 — Week 6 · The differentiator</div>
+        </div>
+        <span class="badge badge-blue">Rare for freshers</span>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-section-label">WHY THIS DIFFERENTIATES YOU</div>
+          <div class="project-section-content">Almost no freshers build this. Shows you understand async patterns beyond HTTP requests. When interviewers ask "how would you handle sending 10,000 welcome emails without slowing the API?" — you have a real, deployed answer.</div>
+        </div>
+        <div class="project-grid-2">
+          <div>
+            <div class="project-section-label">TECH STACK</div>
+            <div class="tech-chips">
+              <span class="tech-chip">Node.js</span>
+              <span class="tech-chip">BullMQ</span>
+              <span class="tech-chip">Redis</span>
+              <span class="tech-chip">PostgreSQL</span>
+              <span class="tech-chip">Express.js</span>
+              <span class="tech-chip">Docker Compose</span>
+              <span class="tech-chip">Nodemailer (fake)</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-section-label">BACKEND CONCEPTS PROVEN</div>
+            <div class="concept-chips">
+              <span class="concept-chip">Async processing</span>
+              <span class="concept-chip">Producer/consumer</span>
+              <span class="concept-chip">Retry logic</span>
+              <span class="concept-chip">Error handling</span>
+              <span class="concept-chip">Docker Compose</span>
+              <span class="concept-chip">Job scheduling</span>
+              <span class="concept-chip">DLQ pattern</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="project-section-label">FEATURES TO BUILD</div>
+          <ul class="feature-list">
+            <li>Email notification queue — POST /send-email adds job to queue, worker processes it</li>
+            <li>Job priority levels — critical, high, normal, low</li>
+            <li>Retry on failure — 3 retries with exponential backoff (1s, 5s, 30s)</li>
+            <li>Dead letter queue — jobs that fail all retries land here for inspection</li>
+            <li>Job status API — GET /jobs/:id returns current status, attempts, result</li>
+            <li>Scheduled/delayed jobs — send email 1 hour after user registers</li>
+            <li>Repeatable cron jobs — daily report every day at 8am</li>
+            <li>Docker Compose — single command spins up app + Redis + PostgreSQL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-num-circle">3</div>
+        <div class="project-title-block">
+          <div class="project-title">E-commerce Backend API</div>
+          <div class="project-subtitle">Month 2 — Weeks 7–8 · The domain everyone understands</div>
+        </div>
+        <span class="badge badge-amber">Best for walk-throughs</span>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-section-label">WHY THIS WORKS</div>
+          <div class="project-section-content">Familiar domain. Every interviewer instantly understands what a cart, product, and order are. Shows you can model a real-world data schema with business logic — not just hello-world CRUD. The Swagger docs make it immediately explorable during interviews.</div>
+        </div>
+        <div class="project-grid-2">
+          <div>
+            <div class="project-section-label">TECH STACK</div>
+            <div class="tech-chips">
+              <span class="tech-chip">Node.js</span>
+              <span class="tech-chip">Express.js</span>
+              <span class="tech-chip">MongoDB</span>
+              <span class="tech-chip">Mongoose</span>
+              <span class="tech-chip">JWT (from P1)</span>
+              <span class="tech-chip">Zod</span>
+              <span class="tech-chip">Swagger UI</span>
+              <span class="tech-chip">Faker.js (seed)</span>
+            </div>
+          </div>
+          <div>
+            <div class="project-section-label">BACKEND CONCEPTS PROVEN</div>
+            <div class="concept-chips">
+              <span class="concept-chip">MongoDB schema design</span>
+              <span class="concept-chip">Pagination</span>
+              <span class="concept-chip">Aggregation pipeline</span>
+              <span class="concept-chip">Business logic</span>
+              <span class="concept-chip">Transactions</span>
+              <span class="concept-chip">API documentation</span>
+              <span class="concept-chip">Data seeding</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="project-section-label">FEATURES TO BUILD</div>
+          <ul class="feature-list">
+            <li>Product catalog — CRUD, text search, filter by category/price range, paginate (cursor-based)</li>
+            <li>Cart management — add item, remove item, update quantity, calculate total with discounts</li>
+            <li>Order placement — create order from cart, decrement inventory atomically (MongoDB transaction)</li>
+            <li>Order status tracking — pending → confirmed → processing → shipped → delivered</li>
+            <li>Order history endpoint — paginated list of user's past orders</li>
+            <li>Admin dashboard endpoints — total sales, top products (aggregation pipeline)</li>
+            <li>Seeder script — populate 100 products, 10 users, 50 orders using faker.js</li>
+            <li>Full Swagger UI at /api-docs — every endpoint documented with schemas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INTERVIEWS -->
+<section id="interviews">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 05 · interview prep</div>
+    <h2 class="section-title">Questions you will actually be asked</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:24px">Click any question to see how to answer it. These are real questions from Indian backend interviews at startups and product companies.</p>
+
+    <div class="qa-list">
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">NODE</span>Explain the Node.js event loop. What happens when you use a blocking operation?</div><div class="qa-a">Node.js is single-threaded. The event loop processes callbacks in phases: timers (setTimeout), I/O callbacks, idle/prepare, I/O poll, setImmediate, and close callbacks. When you call a non-blocking I/O operation (like reading a file), Node delegates it to libuv, continues executing other code, and processes the result callback only when the I/O completes. If you call a blocking operation (like fs.readFileSync), it freezes the entire thread — no other request can be handled until it completes. This is why you always use async versions of I/O functions in production Node.js.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">AUTH</span>How do access tokens and refresh tokens work? Why do we need both?</div><div class="qa-a">Access tokens are short-lived (15–30 minutes) JWTs that authenticate API requests. Refresh tokens are long-lived (7–30 days) tokens stored securely and used only to get new access tokens. We need both because: if an access token is stolen, it expires quickly (15 min). If we only had one long-lived token, theft means the attacker has access for days. The refresh token should be stored in an httpOnly cookie (inaccessible to JavaScript) and sent only to a single /refresh endpoint. On logout, we blacklist the refresh token in Redis so it can't be used even before it expires.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">DB</span>What's the difference between SQL and NoSQL? When do you choose each?</div><div class="qa-a">SQL (PostgreSQL): structured data with defined relationships, ACID transactions, complex queries with JOINs. Best for: financial data, user accounts, anything with strict consistency requirements. NoSQL (MongoDB): flexible schema, document-oriented, horizontal scaling. Best for: product catalogs (attributes vary per product), content platforms, data where structure changes frequently. In practice at Indian startups: use PostgreSQL for your user/auth/payment data (correctness matters most) and MongoDB for your content/catalog/event data (flexibility matters most). Avoid picking one just because it's trendy — pick based on your data's shape and consistency needs.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">DB</span>What is a database index? What's the trade-off?</div><div class="qa-a">An index is a separate data structure (usually a B-tree) that keeps a sorted copy of one or more columns, allowing the database to find rows without scanning the entire table. A query on an indexed column goes from O(n) scan to O(log n) lookup. The trade-off: indexes speed up reads but slow down writes (every INSERT/UPDATE/DELETE must update the index too) and consume extra disk space. Practical rule: always index foreign keys, columns used in WHERE/JOIN/ORDER BY clauses, and columns used in unique constraints. Don't index every column — tables with many indexes become slow on writes.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">ASYNC</span>How would you handle sending 50,000 welcome emails without slowing down the API?</div><div class="qa-a">Never send emails synchronously inside an API handler — it blocks the response for 2–5 seconds and fails if the email server is down. Instead: the API endpoint adds a job to a BullMQ queue (Redis-backed) and immediately responds with 200. A separate worker process picks up jobs from the queue and sends emails one by one (or in small batches). Benefits: the API responds in milliseconds, failed emails retry automatically with exponential backoff, and the email throughput is controlled to avoid hitting rate limits. This is exactly what I built in my Job Queue project.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">REST</span>What makes a good REST API design? Walk me through your approach.</div><div class="qa-a">Good REST design: (1) Resource-oriented URLs — nouns, not verbs. /users/:id not /getUser/:id. (2) Correct HTTP methods — GET to read, POST to create, PUT/PATCH to update, DELETE to remove. (3) Consistent response shape — always return { data, error, meta } so clients can rely on the structure. (4) Proper status codes — 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 422 Validation Error, 500 Internal Server Error. (5) Versioning — prefix with /api/v1/ so you can introduce breaking changes in v2 without breaking existing clients. (6) Pagination on list endpoints — never return unbounded arrays. Always include page, limit, total in the response.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">SCALE</span>How would you improve the performance of a slow API endpoint?</div><div class="qa-a">Systematic approach: (1) Identify the bottleneck first — is it slow SQL, N+1 queries, missing indexes, or no caching? Use EXPLAIN ANALYZE on the query. (2) Fix database issues — add indexes on WHERE/JOIN columns, batch N+1 queries, rewrite with proper JOINs. (3) Add caching — if the data doesn't change per-request, cache it in Redis with a TTL. (4) Paginate — if you're returning 10,000 rows, return 20 at a time. (5) Check for synchronous blocking operations — nothing blocking in the request handler. (6) If none of the above: profile with clinic.js or look at connection pool settings. I applied this in my projects by running EXPLAIN ANALYZE and cutting query time by adding compound indexes.</div></div>
+
+      <div class="qa-card"><div class="qa-q" onclick="toggleQA(this)"><span class="qa-q-prefix">GIT</span>What's your Git workflow? How do you handle merge conflicts?</div><div class="qa-a">I follow a feature branch workflow: create a branch from main for each feature (feature/user-auth, fix/login-bug), make commits with clear messages (feat: add JWT refresh token), push the branch, open a pull request, get review, then merge. For merge conflicts: (1) git fetch origin main, (2) git rebase origin/main on my branch, (3) resolve conflicts in the editor by understanding both changes and deciding what the correct final state should be, (4) git add the resolved files, (5) git rebase --continue, (6) push with --force-with-lease. I also write commit messages in conventional commits format (feat/fix/chore/docs) so the history is readable.</div></div>
+
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="project-section-label">DSA TOPICS FOR BACKEND INTERVIEWS (INDIA)</div>
+      <table class="dsa-table" style="margin-top:12px;background:var(--bg2);border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Key patterns to know</th>
+            <th>LeetCode examples</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Arrays</td><td>Two-pointer, sliding window, prefix sum</td><td>Two Sum, Maximum Subarray</td><td><span class="badge badge-red">Must know</span></td></tr>
+          <tr><td>Hashmaps</td><td>Frequency count, anagram grouping</td><td>Group Anagrams, Top K Frequent</td><td><span class="badge badge-red">Must know</span></td></tr>
+          <tr><td>Strings</td><td>Reversal, palindrome, substring search</td><td>Valid Palindrome, Longest Substring</td><td><span class="badge badge-red">Must know</span></td></tr>
+          <tr><td>Linked lists</td><td>Reverse, detect cycle, merge sorted</td><td>Reverse Linked List, Linked List Cycle</td><td><span class="badge badge-amber">Important</span></td></tr>
+          <tr><td>Stacks</td><td>Matching brackets, monotonic stack</td><td>Valid Parentheses, Daily Temperatures</td><td><span class="badge badge-amber">Important</span></td></tr>
+          <tr><td>Binary search</td><td>Standard template, rotated sorted array</td><td>Binary Search, Find Peak Element</td><td><span class="badge badge-amber">Important</span></td></tr>
+          <tr><td>Trees (basic)</td><td>BFS/DFS traversal, height</td><td>Max Depth of Binary Tree, Level Order</td><td><span class="badge badge-blue">Good to have</span></td></tr>
+          <tr><td>Sorting</td><td>Know time complexities, merge sort idea</td><td>Sort Colors, Merge Intervals</td><td><span class="badge badge-blue">Good to have</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section id="positioning">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 06 · resume & positioning</div>
+    <h2 class="section-title">How to present yourself</h2>
+
+    <div class="position-highlight">
+      <div class="position-title-label">YOUR PRIMARY TITLE (use everywhere)</div>
+      <div class="position-title-big">Node.js Backend Developer</div>
+      <div class="position-note">Use this on your resume header, LinkedIn headline, GitHub bio, and when introducing yourself in interviews. Never say "Junior" — it signals inexperience without benefit. "Node.js Developer" at entry level is understood as a fresher role without the self-limiting label.</div>
+    </div>
+
+    <div class="project-section-label" style="margin-bottom:12px">RESUME STRUCTURE</div>
+    <div class="project-card" style="margin-bottom:20px">
+      <div class="project-body">
+        <ul class="feature-list">
+          <li><strong>Header:</strong> Name · Node.js Backend Developer · City · GitHub link · LinkedIn · Email</li>
+          <li><strong>Skills section (top, not buried):</strong> Node.js, Express.js, PostgreSQL, MongoDB, Redis, JWT, REST APIs, Docker, Git. Then: React, Redux (secondary). No CSS/HTML/Tailwind listed.</li>
+          <li><strong>Projects section (3 projects with GitHub links):</strong> Each has 3 bullet points: what it does, key technical decision you made, and one measurable outcome (e.g. "supports 100 concurrent queue workers")</li>
+          <li><strong>No "objective statement":</strong> Wastes space. Start with skills or projects directly.</li>
+          <li><strong>Education last:</strong> Unless your college is a top-tier IIT/NIT, keep it brief — degree, institution, graduation year.</li>
+          <li><strong>Keep it 1 page:</strong> At entry level, anything more looks like padding.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-section-label" style="margin-bottom:12px">WHERE TO APPLY</div>
+    <div class="company-grid">
+      <div class="company-card">
+        <div class="company-type"><span class="badge badge-green">Priority 1</span> Early-stage startups</div>
+        <div class="company-desc">Series A or bootstrapped. Bangalore, Pune, Hyderabad. Less competition, faster hiring, broader backend scope. You'll touch more parts of the codebase.</div>
+        <div class="company-platforms">Wellfound · LinkedIn · Twitter/X</div>
+      </div>
+      <div class="company-card">
+        <div class="company-type"><span class="badge badge-blue">Priority 2</span> Product-based SMBs</div>
+        <div class="company-desc">Mid-sized SaaS, fintech, edtech (50–300 employees). Structured onboarding, better pay than service firms, mentorship available.</div>
+        <div class="company-platforms">LinkedIn · Naukri · Instahyre</div>
+      </div>
+      <div class="company-card">
+        <div class="company-type"><span class="badge badge-amber">Priority 3</span> Service / outsourcing</div>
+        <div class="company-desc">Use as backup only. Slower growth, repetitive work. If you join one, treat it as a 12-month stepping stone — then move to product.</div>
+        <div class="company-platforms">Naukri · Company careers pages</div>
+      </div>
+    </div>
+
+    <div class="salary-bar">
+      <div class="project-section-label" style="margin-bottom:16px">SALARY EXPECTATIONS (India, 2025, Entry Level)</div>
+      <div class="salary-row">
+        <span class="salary-type">Early-stage startup</span>
+        <span class="salary-range">₹4 – 8 LPA</span>
+        <div class="salary-bar-vis"><div class="salary-fill" style="width:70%"></div></div>
+      </div>
+      <div class="salary-row">
+        <span class="salary-type">Product-based SMB</span>
+        <span class="salary-range">₹6 – 10 LPA</span>
+        <div class="salary-bar-vis"><div class="salary-fill" style="width:90%"></div></div>
+      </div>
+      <div class="salary-row">
+        <span class="salary-type">Remote (Indian company)</span>
+        <span class="salary-range">₹5 – 9 LPA</span>
+        <div class="salary-bar-vis"><div class="salary-fill" style="width:80%"></div></div>
+      </div>
+      <div class="salary-row">
+        <span class="salary-type">Service / outsourcing firm</span>
+        <span class="salary-range">₹3.5 – 5 LPA</span>
+        <div class="salary-bar-vis"><div class="salary-fill" style="width:45%"></div></div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted)">With strong GitHub projects + good interview prep, ₹6–8 LPA is realistic as a first offer from a startup or product company.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div>Built for your journey · Node.js Backend Developer · India 2025</div>
+  <div style="margin-top:6px;color:#30363d">// good luck — the code is already in you</div>
+</footer>
+
+<script>
+  function showMonth(idx) {
+    document.querySelectorAll('.month-panel').forEach((p, i) => {
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.month-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+    });
+  }
+
+  function toggleWeek(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.week-chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+  }
+
+  function toggleQA(qEl) {
+    const answer = qEl.nextElementSibling;
+    answer.classList.toggle('open');
+  }
+
+  // Smooth scroll offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
